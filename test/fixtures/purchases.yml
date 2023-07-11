@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  price: 9.99
+  quality: MyString
+  purchased_at: 2023-07-11 12:21:25
+  content_type: MyString
+  content_id: 1
+
+two:
+  user: two
+  price: 9.99
+  quality: MyString
+  purchased_at: 2023-07-11 12:21:25
+  content_type: MyString
+  content_id: 1
