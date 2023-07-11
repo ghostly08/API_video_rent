@@ -9,3 +9,4 @@ class SeasonsController < ApplicationController
     render json: @season, include: :episodes
   end
 end
+
