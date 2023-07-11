@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   resources :movies, only: [:index, :show]
+  resources :seasons, only: [:index, :show] do
+    resources :episodes, only: [:index, :show]
+  end
+  
 end
