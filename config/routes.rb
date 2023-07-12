@@ -7,4 +7,8 @@ Rails.application.routes.draw do
     resources :episodes, only: [:index, :show]
   end
 
+  resources :users, only: [:index, :show] do
+    resources :purchases, only: [:index, :create]
+  end
+
 end

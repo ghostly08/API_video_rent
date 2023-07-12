@@ -2,9 +2,18 @@
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
 puts "Clear all existing data"
+User.destroy_all
 Movie.destroy_all
 Season.destroy_all
 Episode.destroy_all
+
+puts "Creating users"
+1.times do
+  User.create(
+    email: Faker::Internet.email
+  )
+end
+puts "5 users created!!"
 
 puts "Creating movies"
 20.times do
