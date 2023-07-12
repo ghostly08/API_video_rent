@@ -1,8 +1,15 @@
 class PurchasesController < ApplicationController
 
   def index
-    @user = User.find(params[:user_id])
-    render json: @user.purchases
+    # @user = User.find(params[:user_id])
+    @user = User.find(1)
+    @purchases = @user.purchases
+
+    if content_available? == true
+    render json: @purchases
+    else
+      render json: {error: "Content not available"}
+    end
   end
 
   def create
