@@ -12,8 +12,12 @@ class PurchasesController < ApplicationController
   end
 
   def create
-    @purchase = @user.purchases.create(purchase_params)
+    @purchase = @user.purchases.new(purchase_params)
     @purchase.purchased_at = Time.now
+
+    unless @purchase.can_purchase?
+      return render json: {error: "This content is still in your library. You can not buy it again"}, status: :unprocessable_entity
+    end
 
     if @purchase.save
       render json: @purchase
@@ -29,7 +33,7 @@ class PurchasesController < ApplicationController
   end
 
   def purchase_params
-    params.require(:purchase).permit(:content_id, :content_type, :quality, :price, :purchased_at)
+    params.require(:purchase).permit(:user_id, :content_id, :content_type, :quality, :price, :purchased_at)
   end
 
 end
