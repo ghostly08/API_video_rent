@@ -1,11 +1,10 @@
 class PurchasesController < ApplicationController
+  before_action :set_user
 
   def index
-    # @user = User.find(params[:user_id])
-    @user = User.find(1)
-    @purchases = @user.purchases
+    @purchases = @user.purchases.select { |purchase| purchase.content_available? }
 
-    if content_available? == true
+    if @purchases.any?
     render json: @purchases
     else
       render json: {error: "Content not available"}
@@ -13,8 +12,6 @@ class PurchasesController < ApplicationController
   end
 
   def create
-    @user = User.find(1)
-
     @purchase = @user.purchases.create(purchase_params)
     @purchase.purchased_at = Time.now
 
@@ -26,6 +23,10 @@ class PurchasesController < ApplicationController
   end
 
   private
+
+  def set_user
+    @user = User.find(1)
+  end
 
   def purchase_params
     params.require(:purchase).permit(:content_id, :content_type, :quality, :price, :purchased_at)
