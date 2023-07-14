@@ -9,10 +9,17 @@ gem "rails", "~> 7.0.4", ">= 7.0.4.3"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
 
+# .env file support
+gem "dotenv-rails", "~> 2.7"
+
 # Use bindings.pry for debugging
 gem "pry-rails"
 
+# Populate database with fake data
 gem 'faker'
+
+# Test framework
+gem 'rspec-rails', '~> 5.0.0'
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
@@ -50,3 +57,7 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
+
+gem "dockerfile-rails", ">= 1.5", :group => :development
+
+gem "redis", "~> 5.0"
