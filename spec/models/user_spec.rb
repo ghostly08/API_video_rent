@@ -2,33 +2,24 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
-  subject {
-    User.new(
-      id: 1,
-      email: "rita@example.com",
-      created_at: "2020-01-01 00:00:00",
-      updated_at: "2020-01-01 00:00:00"
-    )
-  }
+  let(:user) { create(:user) }
 
-  it 'return the user email' do
-    expect(subject.email).to eq('rita@example.com')
+  it { should validate_presence_of(:email) }
+
+  context "it validates the uniqueness of attributes" do
+
+      subject { create(:user) }
+
+      it { should validate_uniqueness_of(:email) }
+
   end
 
-  it "has many purchases" do
-    should respond_to(:purchases)
+  context "it has a relationship with other models" do
+
+    it { should have_many(:purchases).dependent(:destroy) }
+
   end
 
-  it 'is not valid without an email' do
-    user = User.new(email: nil)
-    expect(user).to_not be_valid
-  end
 
-  it "is not valid with a duplicate email" do
-    User.create!(
-      email: "rita@example.com"
-    )
-    expect(subject).to_not be_valid
-  end
 
 end
