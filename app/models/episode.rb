@@ -1,5 +1,5 @@
 class Episode < ApplicationRecord
   belongs_to :season
 
-  validates :number, uniqueness: { scope: :season_id }
+  validates :title, :plot, :number, presence: true, uniqueness: { scope: :season_id}
 end
