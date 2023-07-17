@@ -1,6 +1,8 @@
 class SeasonsController < ApplicationController
   def index
-    @seasons = Season.order(created_at: :desc)
+    @seasons = Rails.cache.fetch('seasons', expires_in: 12.hours) do
+      Season.order(created_at: :desc)
+    end
     render json: @seasons, include: :episodes
   end
 
@@ -9,4 +11,3 @@ class SeasonsController < ApplicationController
     render json: @season, include: :episodes
   end
 end
-
