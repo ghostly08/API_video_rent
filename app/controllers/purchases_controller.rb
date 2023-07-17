@@ -20,7 +20,7 @@ class PurchasesController < ApplicationController
     end
 
     if @purchase.save
-      render json: @purchase
+      render json: @purchase.as_json(only: [:user_id, :content_id, :content_type, :quality, :price, :purchased_at]), status: :created
     else
       render json: @purchase.errors, status: :unprocessable_entity
     end
@@ -29,7 +29,7 @@ class PurchasesController < ApplicationController
   private
 
   def set_user
-    @user = User.find(1)
+    @user = User.find(params[:user_id])
   end
 
   def purchase_params
