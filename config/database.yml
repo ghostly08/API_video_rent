@@ -84,7 +84,4 @@ production:
   database: api_video_rent_production
   username: postgres
   password: <%= ENV["API_VIDEO_RENT_DB_PASSWORD"] %>
-
-  # database: api_video_rent_production
-  # username: api_video_rent
-  # password: <%= ENV["VIDEO_LIBRARY_DATABASE_PASSWORD"] %>
+  host: <%= ENV["API_VIDEO_RENT_DB_HOST"] %>
